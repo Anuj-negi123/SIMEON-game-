@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Start</title>
+</head>
+<body>
+    <h2>Enter Your Name</h2>
+    <input type="text" id="playerName" placeholder="Enter your name">
+    <button onclick="startGame()">Start Game</button>
+
+    <script>
+        function startGame() {
+            let playerName = document.getElementById("playerName").value;
+            if (playerName.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            window.location.href = "game.html?name=" + encodeURIComponent(playerName);
+        }
+    </script>
+</body>
+</html>
