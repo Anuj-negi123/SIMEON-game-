@@ -50,12 +50,13 @@ function checkAns(idx) {
         document.querySelector("body").style.backgroundColor = "#fd1c03";
         setTimeout(function () {
             document.querySelector("body").style.backgroundColor = "white";
-        }, 250);
+        }, 250); 
+        const playerName = new URLSearchParams(window.location.search).get('name') || "Guest";
+        save_score(playerName, level);
+
         reset();
     }
 }
-
-
 
 
 function btnPress() {
@@ -80,15 +81,36 @@ function reset() {
 }
 
 
+
+
 function save_score(playerName, score) {
-    console.log("working");
-    fetch("save_score.php", {
+    console.log("Attempting to save score...");
+
+    fetch("http://localhost/anuj/save_score.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ player_name: playerName, score: score })
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error("Error:", error));
+    .then(response => response.text()) 
+    .then(text => {
+        console.log("Raw Response:", text); 
+        try {
+            return JSON.parse(text); 
+        } catch (error) {
+            console.error("JSON Parse Error:", text); 
+                        throw error;
+        }
+    })
+    .then(data => console.log("Server Response:", data))
+    .catch(error => console.error("Fetch Error:", error));
 }
+
+
+
+
+
+
+
+
+
 
