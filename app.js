@@ -7,7 +7,7 @@ let h2 = document.querySelector("h2");
 
 document.addEventListener("keypress", function () {
     if (!started) {
-        console.log("Game is started");
+        console.log("Game started");
         started = true;
         levelUp();
     }
@@ -15,16 +15,12 @@ document.addEventListener("keypress", function () {
 
 function gameFlash(btn) {
     btn.classList.add("flash");
-    setTimeout(function () {
-        btn.classList.remove("flash");
-    }, 250);
+    setTimeout(() => btn.classList.remove("flash"), 250);
 }
 
 function userFlash(btn) {
     btn.classList.add("userflash");
-    setTimeout(function () {
-        btn.classList.remove("userflash");
-    }, 250);
+    setTimeout(() => btn.classList.remove("userflash"), 250);
 }
 
 function levelUp() {
@@ -32,9 +28,9 @@ function levelUp() {
     level++;
     h2.innerText = `Level ${level}`;
 
-    let randIdx = Math.floor(Math.random() * 4); 
+    let randIdx = Math.floor(Math.random() * 4);
     let randColor = btns[randIdx];
-    let randBtn = document.querySelector(`.${randColor}`); 
+    let randBtn = document.querySelector(`.${randColor}`);
     gameSeq.push(randColor);
     console.log(gameSeq);
     gameFlash(randBtn);
@@ -48,16 +44,13 @@ function checkAns(idx) {
     } else {
         h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br>Press any key to start.`;
         document.querySelector("body").style.backgroundColor = "#fd1c03";
-        setTimeout(function () {
-            document.querySelector("body").style.backgroundColor = "white";
-        }, 250); 
+        setTimeout(() => document.querySelector("body").style.backgroundColor = "#092e1a80", 250);
+
         const playerName = new URLSearchParams(window.location.search).get('name') || "Guest";
         save_score(playerName, level);
-
         reset();
     }
 }
-
 
 function btnPress() {
     let btn = this;
@@ -67,11 +60,8 @@ function btnPress() {
     checkAns(userSeq.length - 1);
 }
 
-
 let allBtns = document.querySelectorAll(".btn");
-for (let btn of allBtns) {
-    btn.addEventListener("click", btnPress);
-}
+allBtns.forEach(btn => btn.addEventListener("click", btnPress));
 
 function reset() {
     started = false;
@@ -80,37 +70,20 @@ function reset() {
     level = 0;
 }
 
-
-
-
 function save_score(playerName, score) {
-    console.log("Attempting to save score...");
+    console.log("Saving score...");
 
     fetch("http://localhost/anuj/save_score.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ player_name: playerName, score: score })
     })
-    .then(response => response.text()) 
-    .then(text => {
-        console.log("Raw Response:", text); 
-        try {
-            return JSON.parse(text); 
-        } catch (error) {
-            console.error("JSON Parse Error:", text); 
-                        throw error;
-        }
-    })
-    .then(data => console.log("Server Response:", data))
-    .catch(error => console.error("Fetch Error:", error));
+    .then(response => response.json())
+    .then(data => console.log("Score saved:", data))
+    .catch(error => console.error("Error saving score:", error));
 }
 
-
-
-
-
-
-
-
-
-
+// Open leaderboard in a new tab when button is clicked
+document.getElementById("show-leaderboard").addEventListener("click", function () {
+    window.open("leaderboard.html", "_blank");
+});

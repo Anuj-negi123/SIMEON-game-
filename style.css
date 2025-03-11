@@ -1,5 +1,6 @@
 body{
     text-align: center;
+    margin-top: -20px;
 }
 .btn{
     height: 200px;
@@ -30,4 +31,79 @@ body{
 
 .userflash{
     background-color: green;
+}
+/* Leaderboard Container */
+#leaderboard-container {
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+#leaderboard-container:hover {
+    transform: scale(1.05);
+}
+
+/* Leaderboard Table */
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+#leaderboard-table thead {
+    background: #0077b6;
+    color: white;
+    font-weight: bold;
+}
+
+#leaderboard-table th {
+    padding: 10px;
+}
+
+/* Table Body */
+#leaderboard-table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease;
+}
+
+#leaderboard-table tbody tr:hover {
+    background: #cce7ff;
+    transform: scale(1.02);
+}
+
+/* Table Cells */
+#leaderboard-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Rank Styling */
+#leaderboard-table td:first-child {
+    font-weight: bold;
+    color: #0077b6;
+}
+#show-leaderboard {
+    background: #0077b6;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#show-leaderboard:hover {
+    background: #005f8a;
 }

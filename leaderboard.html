@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+    background: linear-gradient(120deg, #22314b, #238d8b); 
+    text-align: center;
+}
+
+</style>
+<body style="text-align: center;">
+    <h1>🏆 Leaderboard</h1>
+    <table id="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-body">
+            <!-- Leaderboard data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function loadLeaderboard() {
+            fetch("http://localhost/anuj/get_leaderboard.php")
+                .then(response => response.json())
+                .then(data => {
+                    let leaderboardBody = document.getElementById("leaderboard-body");
+                    leaderboardBody.innerHTML = ""; // Clear previous data
+
+                    data.forEach((entry, index) => {
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>🥇 ${index + 1}</td>
+                            <td>${entry.player_name}</td>
+                            <td>${entry.score}</td>
+                        `;
+                        leaderboardBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error loading leaderboard:", error));
+        }
+
+        // Load leaderboard when page is opened
+        window.onload = loadLeaderboard;
+    </script>
+</body>
+</html>

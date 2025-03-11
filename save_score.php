@@ -1,41 +1,29 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$response = [];  
 
-header("Access-Control-Allow-Origin: http://127.0.0.1:3000");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (isset($input['player_name']) && isset($input['score'])) {
+        $playerName = $input['player_name'];
+        $score = $input['score'];
 
-header("Content-Type: application/json");
+     
+        $response['success'] = true;
+        $response['message'] = "Score saved successfully for player: $playerName with score: $score";
+    } else {
+        $response['success'] = false;
+        $response['message'] = "Missing player_name or score data";
+    }
 
-include 'db.php'; 
-
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo json_encode(["error" => "Invalid request method"]);
-    exit();
-}
-
-$input = file_get_contents("php://input");
-$data = json_decode($input, true);
-
-if (!isset($data['player_name']) || !isset($data['score'])) {
-    echo json_encode(["error" => "Invalid input data", "raw_input" => $input]);
-    exit();
-}
-
-$player_name = $data['player_name'];
-$score = $data['score'];
-
-file_put_contents("debug.log", "Received: player_name=$player_name, score=$score\n", FILE_APPEND);
-
-$stmt = $conn->prepare("INSERT INTO scores (player_name, score) VALUES (?, ?) ON DUPLICATE KEY UPDATE score = GREATEST(score, VALUES(score))");
-$stmt->bind_param("si", $player_name, $score);
-
-if ($stmt->execute()) {
-    echo json_encode(["success" => true, "message" => "Score saved successfully"]);
 } else {
-    echo json_encode(["error" => "Database error: " . $stmt->error]);
+    $response['error'] = "Invalid request method";
 }
 
-$stmt->close();
+header('Content-Type: application/json'); 
+
+echo json_encode($response);
 ?>
+
+
