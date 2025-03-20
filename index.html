@@ -1,33 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Start</title>
-    <style>
-        body{
-           background: linear-gradient(90deg, #89f7fe, #66a6ff);
-
-        }
-       
-    </style>
-    
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body style="text-align: center; ">
-    <h2 style="font-size: 45px;;"> Enter Your Name</h2>
-    <input type="text" id="playerName" placeholder="Enter your name" style="font-size: 30px;">
-    <button onclick="startGame()" style="font-size: 30px;" >Start Game</button>
-
+<body>
+    <div class="game-setup">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="playerName" placeholder="Enter your name">
+    
+        <br><br>
+    
+        <h2>Select Time Limit</h2>
+        <select id="timeLimit">
+            <option value="0">select time </option>
+            <option value="120">10 sec</option>
+            <option value="30"> 15 sec</option>
+            <option value="60"> 30 sec</option>
+            <option value="120">45 sec</option>
+            <option value="300">1 min</option>
+        </select>
+    
+        <br><br>
+    
+        <button onclick="startGame()" class="start-btn">Start Game</button>
+    </div>
+    
     <script>
         function startGame() {
             let playerName = document.getElementById("playerName").value;
+            let timeLimit = document.getElementById("timeLimit").value;
+
             if (playerName.trim() === "") {
                 alert("Please enter your name!");
                 return;
             }
-            window.location.href = "game.html?name=" + encodeURIComponent(playerName);
+
+            window.location.href = "game.html?name=" + encodeURIComponent(playerName) + "&time=" + timeLimit;
         }
     </script>
 </body>

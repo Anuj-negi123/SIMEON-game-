@@ -1,0 +1,125 @@
+body {
+    background: linear-gradient(90deg, #89f7fe, #66a6ff);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+justify-content: center;
+align-items: center;
+height: 80vh;
+background-color: #1a1a1a;
+margin: 0;
+}
+
+h2 {
+    font-size: 45px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input, select {
+    font-size: 30px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #0077b6;
+    outline: none;
+    text-align: center;
+    width: 60%;
+    max-width: 400px;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #ff6b6b;
+    box-shadow: 0px 0px 10px rgba(255, 107, 107, 0.7);
+}
+
+.start-btn {
+    font-size: 30px;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.start-btn:hover {
+    background: linear-gradient(135deg, #ff4757, #e84118);
+    transform: scale(1.1);
+    box-shadow: 0px 10px 25px rgba(255, 71, 87, 0.6);
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+}
+
+/* Glowing Effect */
+.start-btn::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #ff4757, #ff6b6b, #ff4757, #ff6b6b);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.start-btn:hover::before {
+    opacity: 1;
+}
+.game-setup {
+text-align: center;
+background: rgba(0, 0, 0, 0.8);
+padding: 20px;
+border-radius: 15px;
+width: 40%;
+margin: auto;
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+color: #fff;
+transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+}
+.game-setup:hover {
+    box-shadow: 0px 10px 25px rgba(255, 205, 7, 0.7); /* Yellow glow */
+    transform: scale(1.05);
+}
+h2 {
+font-size: 1.8rem;
+color: #fdd835;
+margin-bottom: 10px;
+}
+
+input, select {
+font-size: 1.2rem;
+padding: 10px;
+width: 80%;
+border: none;
+border-radius: 8px;
+text-align: center;
+}
+
+.start-btn {
+font-size: 1.5rem;
+padding: 10px 20px;
+background-color: #ff5722;
+color: white;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.start-btn:hover {
+background-color: #e64a19;
+transform: scale(1.1);
+}
