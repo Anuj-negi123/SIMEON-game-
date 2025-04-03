@@ -1,7 +1,15 @@
 body{
     text-align: center;
+   margin: 3 rem ;
    
 }
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #FFD700; /* Gold color for a cool effect */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
 .btn{
     height: 200px;
     width: 200px;
@@ -12,6 +20,8 @@ body{
 .btn-container{
     display: flex;
     justify-content: center;
+    margin: 30 px;
+
 }
 .yellow{
     background-color:#f99b45;
